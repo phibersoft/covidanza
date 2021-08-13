@@ -4,7 +4,7 @@ import Future from "./components/Future";
 import { getCountryData, getGeneralData } from "./utils/api";
 import { setCountry, setGeneralData } from "./utils/redux.util";
 import store from "./redux/store";
-import Country from "./components/Country";
+import WorldMap from "./components/WorldMap";
 
 function Napp() {
   const [isGeneralDataAccessible, setIsGeneralDataAccessible] =
@@ -21,7 +21,7 @@ function Napp() {
           }
         }}
       >
-        {/*<WorldMap />*/}
+        <WorldMap />
       </Future>
       {isGeneralDataAccessible && (
         <Future
@@ -33,7 +33,7 @@ function Napp() {
             }
           }}
         >
-          <Country />
+          {/*<Country />*/}
         </Future>
       )}
     </Layout>
