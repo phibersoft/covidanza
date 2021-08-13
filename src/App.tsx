@@ -1,5 +1,4 @@
 import React, { createRef } from "react";
-import "./App.css";
 import { VectorMap } from "react-jvectormap";
 import cl from "countries-list";
 import axios from "axios";

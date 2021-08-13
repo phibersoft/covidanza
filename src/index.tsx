@@ -1,16 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "./index.scss";
 import reportWebVitals from "./reportWebVitals";
 import Napp from "./Napp";
 import { CssBaseline, ThemeProvider } from "@material-ui/core";
 import { theme } from "./utils/theme";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <Napp />
-  </ThemeProvider>,
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Napp />
+    </ThemeProvider>
+  </Provider>,
   document.getElementById("root")
 );
 

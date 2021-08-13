@@ -1,17 +1,21 @@
 import React from "react";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 interface LayoutProps {
-    children?: any;
+  children?: any;
 }
 
-export default function Layout({children}: LayoutProps){
-    return (
-        <div>
-            Layout
+export default function Layout({ children }: LayoutProps) {
+  return (
+    <div>
+      <Navbar />
 
-            <hr />
+      <hr />
 
-            {children}
-        </div>
-    )
+      <main>{children}</main>
+
+      <Footer />
+    </div>
+  );
 }

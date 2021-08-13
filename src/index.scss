@@ -1,0 +1,186 @@
+// Bu değeri responsive tasarımımızın kırılma noktası olarak her yerde kullanacağız.
+// 856px olmasının bir sebebi yok kendim deneme yoluyla bu değere karar kıldım.
+$breakpoint: 856px;
+
+// Default olarak hiçbir margin-padding istemiyoruz.
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// React projelerinin boilerplate bazı ayarları
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+// Etiketlerin genel tanımlarını burada yapacağız.
+
+a {
+  text-decoration: none;
+}
+
+main {
+  // 100vh tam ekran boyutu - 75px (Navbar Boyutumuz) - 30px (Footer Boyutumuz) - 2px (Padding Payı);
+  min-height: calc(100vh - 107px);
+}
+
+// Footer Styles
+
+footer {
+  height: 30px;
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+
+  a {
+    margin-left: 7px;
+    color: white;
+  }
+}
+
+// Navbar Styles
+
+header {
+  color: white;
+  background-color: black;
+  height: 75px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  .logo {
+    flex: 1;
+    padding-left: 4%;
+
+    a {
+      color: white;
+      font-size: 30px;
+      font-weight: bold;
+      font-family: "Indie Flower", cursive;
+      text-transform: uppercase;
+    }
+  }
+
+  nav {
+    flex: 4;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1em;
+      font-family: "Poppins", sans-serif;
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        color: #ff6060;
+      }
+
+      &.active {
+        color: red;
+
+        &:hover {
+          color: white;
+        }
+      }
+    }
+
+    @media screen and (max-width: $breakpoint) {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      left: -200px;
+      bottom: 0;
+      top: 0;
+      height: 100vh;
+      background-color: black;
+      width: 200px;
+      transition: left 0.6s ease-in-out;
+      z-index: 999999;
+      &.open {
+        left: 0;
+      }
+    }
+  }
+
+  .burger {
+    padding-right: 4%;
+    @media screen and (min-width: $breakpoint) {
+      display: none;
+    }
+
+    svg {
+      fill: white;
+    }
+  }
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.worldmap-wrapper {
+  height: 80vh;
+  width: 100%;
+}
+
+.bar-chart-wrapper {
+  height: 600px;
+  width: 80%;
+}
+
+.country-container {
+  margin: 10px 0 30px 0;
+  .info {
+    margin-bottom: 50px;
+
+    h2 {
+      font-family: 'Poppins', cursive;
+    }
+
+    .flag {
+      max-height: 50px;
+      max-width: 50px;
+      margin-left: 10px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+
+    .updated {
+      text-align: center;
+      font-family: 'Roboto', cursive;
+      font-size: 12px;
+      font-weight: 300;
+    }
+  }
+}
+
+#loading {
+  color: red;
+  text-align: center;
+  font-family: 'Poppins', cursive;
+  font-size: 17px;
+  margin: 7px 0;
+}
