@@ -5,6 +5,7 @@ import { getCountryData, getGeneralData } from "./utils/api";
 import { setCountry, setGeneralData } from "./utils/redux.util";
 import store from "./redux/store";
 import WorldMap from "./components/WorldMap";
+import Country from "./components/Country";
 
 function Napp() {
   const [isGeneralDataAccessible, setIsGeneralDataAccessible] =
@@ -33,7 +34,7 @@ function Napp() {
             }
           }}
         >
-          {/*<Country />*/}
+          <Country />
         </Future>
       )}
     </Layout>

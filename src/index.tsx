@@ -7,14 +7,17 @@ import { CssBaseline, ThemeProvider } from "@material-ui/core";
 import { theme } from "./utils/theme";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Napp />
-    </ThemeProvider>
-  </Provider>,
+  <ErrorBoundary>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Napp />
+      </ThemeProvider>
+    </Provider>
+  </ErrorBoundary>,
   document.getElementById("root")
 );
 
