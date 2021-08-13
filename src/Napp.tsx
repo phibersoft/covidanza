@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Layout from "./components/Layout";
 import Future from "./components/Future";
-import WorldMap from "./components/WorldMap";
 import { getCountryData, getGeneralData } from "./utils/api";
 import { setCountry, setGeneralData } from "./utils/redux.util";
 import store from "./redux/store";
