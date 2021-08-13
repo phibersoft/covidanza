@@ -22,7 +22,7 @@ function Napp() {
           }
         }}
       >
-        <WorldMap />
+        {/*<WorldMap />*/}
       </Future>
       {isGeneralDataAccessible && (
         <Future
