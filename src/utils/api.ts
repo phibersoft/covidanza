@@ -1,4 +1,4 @@
-import { getDayCountBetweenCoronaAndToday } from "./time";
+import {getDayCountBetweenCoronaAndToday, timestampToDate} from "./time";
 import {
   CovidItem_Country,
   CovidItem_General,
@@ -21,7 +21,9 @@ export const getGeneralData = async () => {
     const results = await axios.get<CovidItem_General[]>(apiUrls.general);
     if (results.data.length !== 0) {
       return successResult<CovidItem_General[]>(
-        results.data.filter((d) => d.countryInfo.iso2 !== null)
+        results.data.filter((d) => d.countryInfo.iso2 !== null).map((d) => {
+          return {...d, updated: timestampToDate(d.updated)}
+        })
       );
     }
     throw new Error("No Data Found");

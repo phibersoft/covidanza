@@ -6,6 +6,14 @@ import {
 import { ACTIONS_General } from "../redux/actions/generalActions";
 import store from "../redux/store";
 import { ACTIONS_Country } from "../redux/actions/countryActions";
+/*
+Normal şartlarda Redux'ta bu kullanım tipi yoktur. mapDispatchToProps nesnesiyle işlemler halledilir.
+Detaylı bilgi: https://react-redux.js.org/using-react-redux/connect-mapdispatch
+
+Bizim kullanmamızın amacı Redux Store'umuzun bazı cihazlarda Material UI Theme Provider'ımız ile çakışmasından dolayı.
+Herhangi bir riske girmemek için "dispatch işlemlerini" manual yolla hallediyoruz.
+*/
+
 
 export const setGeneralData = (data: CovidItem_General[]) => {
   const act: ACTIONS_General = {

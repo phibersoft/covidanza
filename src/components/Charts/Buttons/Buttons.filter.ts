@@ -1,6 +1,6 @@
 import { ButtonProps } from "@material-ui/core";
-import { BarChartDataItem } from "./index";
-import { compareDates } from "../../utils/dom";
+import { compareDates } from "../../../utils/dom";
+import { ChartValueItem } from "../index";
 
 export type ButtonFilterIds = "weekly" | "monthly" | "three-monthly";
 
@@ -9,7 +9,10 @@ interface ButtonsFilterProps extends ButtonProps {
   filterType: ButtonFilterIds;
 }
 
-export const FilterButtons: ButtonsFilterProps[] = [
+/**
+ * @description Bu nesne zaman filtreli istatistik kullanırken gösterilen, seçim yapılan butonları içerir.
+ */
+export const ButtonsFilter: ButtonsFilterProps[] = [
   {
     text: "Weekly",
     filterType: "weekly",
@@ -24,12 +27,15 @@ export const FilterButtons: ButtonsFilterProps[] = [
   },
 ].map((btn) => ({ ...btn, variant: "contained", type: "button" } as any));
 
-export const FilterButtonsDataSetter: Record<
+/**
+ * @description Satır15 te tanımladığımız ButtonsFilter dizisindeki butonlara tıklandığında nasıl bir filtreleme uyguladıklarını açıklar.
+ */
+export const ButtonsFilterDataSetter: Record<
   ButtonFilterIds,
-  (data: BarChartDataItem[]) => BarChartDataItem[]
+  (data: ChartValueItem[]) => ChartValueItem[]
 > = {
   weekly: (data) => {
-    const wR: BarChartDataItem[] = [data[0]]; // İlk günün her zaman dahil olmasını istiyoruz.
+    const wR: ChartValueItem[] = [data[0]]; // İlk günün her zaman dahil olmasını istiyoruz.
     for (var i = data.length - 2; i > 1; i -= 7) {
       wR.push(data[i]);
     }
@@ -39,7 +45,7 @@ export const FilterButtonsDataSetter: Record<
     return [...wR, data[data.length - 1]]; // Sonradan eklenen veriler ile birlikte son günün de her zaman dahil olmasını istiyoruz.
   },
   monthly: (data) => {
-    const wR: BarChartDataItem[] = [data[0]];
+    const wR: ChartValueItem[] = [data[0]];
 
     for (var i = 1; i < data.length - 1; i++) {
       const splitted = data[i].name.split("/"); // ["12", "30", "1970"];
@@ -51,7 +57,7 @@ export const FilterButtonsDataSetter: Record<
     return [...wR, data[data.length - 1]];
   },
   "three-monthly": (data) => {
-    const wR: BarChartDataItem[] = [data[0]];
+    const wR: ChartValueItem[] = [data[0]];
 
     for (var i = 1; i < data.length - 1; i++) {
       const splitted = data[i].name.split("/"); // ["12", "30", "1970"];

@@ -1,5 +1,9 @@
 import React from "react";
 
+/**
+ * @description Sayfanın en alt kısmındaki siyah bar burada render edilir.
+ * @constructor
+ */
 export default function Footer() {
   return (
     <footer>

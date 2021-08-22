@@ -24,9 +24,6 @@ export const theme = createTheme({
       track: {
         backgroundColor: 'white'
       },
-      disabled: {
-
-      }
     }
   }
 });

@@ -1,5 +1,9 @@
 import { NavItemProps } from "./Item";
 
+/**
+ * @param name Kullanıcıya gösterilecek olan isim
+ * @param filterId Filtreleme Tipi
+ */
 export const NavbarItems: NavItemProps[] = [
   {
     name: "Cases",

@@ -17,9 +17,9 @@ export const toggleSidebar = () => {
 /**
  * @description Bir kelimenin ilk harfini büyütüp geri döndürür.
  * @param str String
- * @example capitalizeFirstWord("phiber") = "Phiber"
+ * @example capitalizeFirstLetter("phiber") = "Phiber"
  */
-export const capitalizeFirstWord = (str: string) =>
+export const capitalizeFirstLetter = (str: string) =>
   `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
 
 /**

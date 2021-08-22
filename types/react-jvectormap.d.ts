@@ -1,3 +1,8 @@
+/*
+    "react-jvectormap" paketi bize bir typescript sunmadığı için işimize yarayacak yerleri kendimiz oluşturduk.
+    components/WorldMap/index.tsx kısmında kullandığımız componentin gerektirdiği veriler.
+*/
+
 declare module "react-jvectormap" {
     import React from "react";
 

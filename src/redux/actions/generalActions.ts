@@ -16,7 +16,10 @@ type setFilterTypeInterface = ACTION_GeneratorInterface<
 
 type setTodayInterface = ACTION_GeneratorInterface<"SET_TODAY", boolean>;
 
-export type ACTIONS_General = setGeneralDataInterface | setFilterTypeInterface | setTodayInterface;
+export type ACTIONS_General =
+  | setGeneralDataInterface
+  | setFilterTypeInterface
+  | setTodayInterface;
 export type INITIAL_General = {
   items: CovidItem_General[];
   filterType: FilterIds;

@@ -13,6 +13,11 @@ interface NavbarProps {
   filterId?: FilterIds;
 }
 
+/**
+ * @description Tüm navigasyon componenti burada render edilir.
+ * @param filterId Reduxımızda seçilmiş olan filtreleme tipi
+ * @constructor
+ */
 function Navbar({ filterId }: NavbarProps) {
   return (
     <header>
@@ -40,9 +45,6 @@ function Navbar({ filterId }: NavbarProps) {
                 }}
               />
             }
-            style={{
-              cursor: "not-allowed",
-            }}
             label={"Today"}
             labelPlacement={"start"}
           />

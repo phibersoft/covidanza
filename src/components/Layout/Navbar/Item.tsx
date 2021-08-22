@@ -9,6 +9,9 @@ export interface NavItemProps {
 }
 
 export default function NavItem({ name, filterId, active }: NavItemProps) {
+  /**
+   * @description Tıklandığında redux sistemindeki filtreyi değiştir. (Bu değişim WorldMap nesnemizdeki renklendirmeleri değiştirecektir.)
+   */
   const onClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault();
 

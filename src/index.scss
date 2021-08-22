@@ -101,6 +101,7 @@ header {
       }
     }
 
+    // Eğer mobil cihazdan giriş yapılmışsa navbarımızı artık bir "sidebar"'a dönüştürüyoruz.
     @media screen and (max-width: $breakpoint) {
       display: flex;
       flex-direction: column;
@@ -131,29 +132,54 @@ header {
   }
 }
 
+// Projemizin bir çok yerinde kullanacağımız "ortaya alma" stillendirmesi.
+// Bir Backend Developerın en büyük hayat arkadaşıdır.
 .wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+// Dünya haritasını kapsayan component. Genel olarak dünya haritasının boyutları ile ilgileniyor.
 .worldmap-wrapper {
   height: 80vh;
   width: 100%;
+  position: relative;
+
+  // Haritanın sağ üstünde bulunan ülke seçme selectbox'ını kapsayan component.
+  .country-select {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    // Haritamızın altında kalmaması için z-indexini arttırıyoruz.
+    z-index: 5;
+
+    .MuiFormControl-root {
+      z-index: 6;
+    }
+  }
+
+  @media screen and (max-width: $breakpoint) {
+    height: 50vh;
+  }
 }
 
+// Analizlerimizi kapsayan component.
 .bar-chart-wrapper {
   height: 600px;
   width: 80%;
 }
 
+// Haritanın aşağısında bulunan alanın tamamını kapsayan component.
 .country-container {
   margin: 10px 0 30px 0;
+
+  // Ülke bilgileri
   .info {
     margin-bottom: 50px;
 
     h2 {
-      font-family: 'Poppins', cursive;
+      font-family: "Poppins", cursive;
     }
 
     .flag {
@@ -170,17 +196,55 @@ header {
 
     .updated {
       text-align: center;
-      font-family: 'Roboto', cursive;
+      font-family: "Roboto", cursive;
       font-size: 12px;
       font-weight: 300;
     }
   }
 }
 
+// Bir ülkenin detay bilgilerinin bulunduğu tablonun stillendirmesi.
+table.country-details {
+  margin-bottom: 50px;
+  border-collapse: collapse;
+
+  tbody {
+    tr {
+      td {
+        color: white;
+        background-color: black;
+      }
+
+      td,
+      th {
+        // border kullanınca dış kısıma efekt verecektir. box-shadow'un inset özelliği ile aslında kenarlığımızı içeriden veriyoruz.
+        box-shadow: inset 0 0 0 1px #6e6e6e;
+        padding: 10px 45px;
+        text-align: center;
+      }
+    }
+  }
+}
+
+// Analizlerimizin başında bulunan siyah arkaplanlı başlığın stillendirmesi.
+.chart-title {
+  color: white;
+  background-color: black;
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 19px;
+  font-weight: 500;
+  margin: 35px 0;
+  text-align: center;
+}
+
+// Yükleme (Bazı durumlarda Hata) durumlarında ekrana bastırdığımız yazının stillendirmesi.
 #loading {
   color: red;
   text-align: center;
-  font-family: 'Poppins', cursive;
+  font-family: "Poppins", cursive;
   font-size: 17px;
   margin: 7px 0;
 }

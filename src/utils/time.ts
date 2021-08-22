@@ -23,9 +23,9 @@ export const sleep = (ms: number) => {
  * @param ts Timestamp
  * @example timestampToDate(1628816841) = "13.08.2021 04:07:21"
  */
-export const timestampToDate = (ts: number) => {
+export const timestampToDate = (ts: number | string) => {
   const da = new Date();
-  da.setTime(ts);
+  da.setTime(ts as number);
 
   return da.toLocaleString("tr-TR");
 };

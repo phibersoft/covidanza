@@ -1,95 +1,50 @@
-import React, { createRef } from "react";
-import { VectorMap } from "react-jvectormap";
-import cl from "countries-list";
-import axios from "axios";
+import React, { useState } from "react";
+import Layout from "./components/Layout";
+import Future from "./components/Future";
+import { getCountryData, getGeneralData } from "./utils/api";
+import { setCountry, setGeneralData } from "./utils/redux.util";
+import store from "./redux/store";
+import WorldMap from "./components/WorldMap";
+import Country from "./components/Country";
 
+/**
+ * @description Anasayfamız burada render ediliyor.
+ * @constructor
+ */
+function Home() {
+    // Bir ülkenin verisine erişmeden önce Rest API'den tüm ülkelerin verilerini çekip Dünya Haritası oluşturuyoruz. Bu işlem bitene kadar diğer işlemleri askıya alacağız.
+  const [isGeneralDataAccessible, setIsGeneralDataAccessible] =
+    useState<boolean>(false);
 
-interface AppState {
-  countries: Record<string, number>;
+  return (
+    <Layout>
+      <Future
+        handlerFunction={async () => {
+          const results = await getGeneralData();
+          if (results.success === true) {
+            // Hem Reduxtaki verimizi güncelle, hem de işlemleri askıya almayı bırak.
+            setGeneralData(results.data);
+            setIsGeneralDataAccessible(true);
+          }
+        }}
+      >
+        <WorldMap />
+      </Future>
+      {isGeneralDataAccessible && (
+        <Future
+          handlerFunction={async () => {
+            const general = store.getState().general;
+            const country = await getCountryData("Turkey", general.items);
+            if (country.success === true) {
+              setCountry(country.data);
+            }
+          }}
+        >
+          <Country />
+        </Future>
+      )}
+    </Layout>
+  );
 }
 
-const apiUrl = "https://corona.lmao.ninja/v2/countries?yesterday=false&sort";
-class App extends React.Component<any, AppState> {
-  mapRef: React.RefObject<unknown>;
-
-  constructor(props) {
-    super(props);
-    this.mapRef = createRef();
-    this.state = {
-      countries: {},
-    };
-  }
-
-  async componentDidMount() {
-    axios.get(apiUrl).then((r) => {
-      var obj = {};
-      r.data.forEach((d) => {
-        obj[d.countryInfo.iso2] = d.deaths;
-      });
-
-      this.setState({
-        countries: obj,
-      });
-    });
-  }
-
-  render() {
-    return (
-      <>
-        <div style={{ width: "100%", height: "100vh" }}>
-          <VectorMap
-            map={"world_mill"}
-            backgroundColor="#3b96ce"
-            ref={this.mapRef}
-            containerStyle={{
-              width: "100%",
-              height: "100%",
-            }}
-
-            containerClassName="map"
-            onRegionClick={(e, code) => {
-              console.log(e);
-              console.log(cl.countries[code.toUpperCase()].name);
-            }}
-            zoomOnScroll={false}
-            labels={{
-              render: (l) => {
-                console.log(l);
-              },
-            }}
-            onRegionTipShow={(e, tip, code) => {
-              const found = Object.keys(this.state.countries).find(k => k === code.toUpperCase());
-
-              var insert = "<br />Unknown";
-
-              if (found) {
-                insert = `<br/>Deaths: ${this.state.countries[found]}`;
-              }
-
-              tip.html(tip.html() + insert);
-            }}
-            series={{
-              regions: [
-                {
-                  values: this.state.countries,
-                  normalizeFunction: "polynomial",
-                  scale: ["#ff5252", "#730000"],
-                },
-              ],
-            }}
-            regionStyle={{
-              selected: {
-                fill: "yellow",
-              },
-            }}
-            regionsSelectable={true}
-            regionsSelectableOne={true}
-          />
-        </div>
-        <div style={{ height: "200vh" }}>Other Content...</div>
-      </>
-    );
-  }
-}
-
-export default App;
+export default Home;
