@@ -25,7 +25,13 @@ export const sleep = (ms: number) => {
  */
 export const timestampToDate = (ts: number | string) => {
   const da = new Date();
-  da.setTime(ts as number);
+  const t = Number(ts);
+
+  if (t <= 9_999_999_999) {
+    da.setTime(t * 1000);
+  } else {
+    da.setTime(t);
+  }
 
   return da.toLocaleString("tr-TR");
 };

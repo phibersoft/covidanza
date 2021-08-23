@@ -6,7 +6,7 @@
 declare module "react-jvectormap" {
     import React from "react";
 
-    type CustomStyling = Record<"initial" | "hover" | "selected" | "selectedHover", React.CSSProperties>
+    type CustomStyling = Partial<Record<"initial" | "hover" | "selected" | "selectedHover", React.CSSProperties>>
     type LatLang = Array<number, number>;
     type MouseOn = React.MouseEvent<HTMLDivElement>;
 
@@ -21,6 +21,7 @@ declare module "react-jvectormap" {
 
     export interface VectorMapProps {
         map: "world_mill";
+        ref?: any;
         backgroundColor?: string;
         containerStyle?: React.CSSProperties;
         containerClassName?: string;
@@ -43,9 +44,10 @@ declare module "react-jvectormap" {
             markers?: DataSeries[];
         };
         onRegionClick?: (e: MouseOn, code: string) => void;
-        onRegionTipShow?: (e: MouseOn, tooltip: HTMLDivElement, code: string) => void;
+        onRegionTipShow?: (e: MouseOn, tooltip: any, code: string) => void;
         onRegionOver?: (e: MouseOn, code: string) => void;
         onRegionOut?: (e: MouseOn, code: string) => void;
+        selectedRegions?: string[];
     }
     export function VectorMap(props: VectorMapProps): React.ReactElement<VectorMapProps>;
     export default VectorMap;

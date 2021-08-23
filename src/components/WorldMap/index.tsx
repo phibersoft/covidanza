@@ -13,9 +13,11 @@ import { setCountry } from "../../utils/redux.util";
 import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
 
 interface WorldMapProps extends Partial<Pick<C_STATE, "general" | "country">> {}
+
 interface WorldMapState {
   selectedCountry: string;
 }
+
 /**
  * @description WorldMap dediğimiz sayfanın en başında bulunan harita burada render edilir.
  * @param general Tüm ülkelerin genel verisi.
@@ -29,8 +31,8 @@ class WorldMap extends React.Component<WorldMapProps, WorldMapState> {
     super(props);
     this.mapRef = React.createRef();
     this.state = {
-      selectedCountry: this.props.country?.country || "Turkey"
-    }
+      selectedCountry: this.props.country?.country || "Turkey",
+    };
   }
 
   /**
@@ -49,8 +51,8 @@ class WorldMap extends React.Component<WorldMapProps, WorldMapState> {
     if (getCountry.success === true) {
       setCountry(getCountry.data);
       this.setState({
-        selectedCountry: countryName
-      })
+        selectedCountry: countryName,
+      });
     }
   };
 
